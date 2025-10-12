@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:call_log_repository/call_log_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keyper/call_log/bloc/call_log_bloc.dart';
+import 'package:keyper/l10n/l10n.dart';
 import 'package:permission_client/permission_client.dart';
 
 class CallLogPage extends StatelessWidget {
@@ -77,7 +80,7 @@ class _CallLogsViewState extends State<CallLogsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Call Logs'),
+        title: Text(context.l10n.callLogsTitle),
         backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
         scrolledUnderElevation: 1,
@@ -94,12 +97,18 @@ class _CallLogsViewState extends State<CallLogsView> {
                   case CallLogPermissionDenied:
                     return _buildPermissionDenied(context);
                   case CallLogError:
-                    return _buildError(context, (state as CallLogError).message);
-                  case CallLogLoaded: 
+                    return _buildError(
+                      context,
+                      (state as CallLogError).message,
+                    );
+                  case CallLogLoaded:
                     return _buildCallLogsList(context, state as CallLogLoaded);
                   case CallLogLoadingMore:
                     final loadingMoreState = state as CallLogLoadingMore;
-                    return _buildCallLogsListWithLoading(context, loadingMoreState.currentLogs);
+                    return _buildCallLogsListWithLoading(
+                      context,
+                      loadingMoreState.currentLogs,
+                    );
                   default:
                     return const Center(child: CircularProgressIndicator());
                 }
@@ -118,7 +127,7 @@ class _CallLogsViewState extends State<CallLogsView> {
         controller: _searchController,
         onChanged: _onSearchChanged,
         decoration: InputDecoration(
-          hintText: 'Search call logs...',
+          hintText: context.l10n.searchCallLogsHint,
           prefixIcon: const Icon(Icons.search),
           suffixIcon: _searchController.text.isNotEmpty
               ? IconButton(
@@ -130,7 +139,9 @@ class _CallLogsViewState extends State<CallLogsView> {
                 )
               : null,
           filled: true,
-          fillColor: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+          fillColor: Theme.of(
+            context,
+          ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide.none,
@@ -146,7 +157,10 @@ class _CallLogsViewState extends State<CallLogsView> {
               width: 2,
             ),
           ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 16,
+          ),
         ),
       ),
     );
@@ -230,7 +244,7 @@ class _CallLogsViewState extends State<CallLogsView> {
     Color? color,
   }) {
     final chipColor = color ?? Theme.of(context).colorScheme.primary;
-    
+
     return FilterChip(
       label: Row(
         mainAxisSize: MainAxisSize.min,
@@ -238,17 +252,13 @@ class _CallLogsViewState extends State<CallLogsView> {
           Icon(
             icon,
             size: 16,
-            color: isSelected 
-                ? Colors.white 
-                : chipColor,
+            color: isSelected ? Colors.white : chipColor,
           ),
           const SizedBox(width: 6),
           Text(
             label,
             style: TextStyle(
-              color: isSelected 
-                  ? Colors.white 
-                  : chipColor,
+              color: isSelected ? Colors.white : chipColor,
               fontWeight: FontWeight.w600,
               fontSize: 13,
             ),
@@ -272,6 +282,7 @@ class _CallLogsViewState extends State<CallLogsView> {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     );
   }
+
   Widget _buildPermissionDenied(BuildContext context) {
     return Center(
       child: Padding(
@@ -286,12 +297,12 @@ class _CallLogsViewState extends State<CallLogsView> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Permission Required',
+              context.l10n.permissionRequiredTitle,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
             Text(
-              'This app needs permission to access your call logs to display them.',
+              context.l10n.permissionRequiredMessage,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
@@ -300,7 +311,7 @@ class _CallLogsViewState extends State<CallLogsView> {
               onPressed: () {
                 context.read<CallLogBloc>().add(const RequestPermission());
               },
-              child: const Text('Grant Permission'),
+              child: Text(context.l10n.grantPermission),
             ),
           ],
         ),
@@ -322,7 +333,7 @@ class _CallLogsViewState extends State<CallLogsView> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Error',
+              context.l10n.errorTitle,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
@@ -336,7 +347,7 @@ class _CallLogsViewState extends State<CallLogsView> {
               onPressed: () {
                 context.read<CallLogBloc>().add(const LoadCallLogs());
               },
-              child: const Text('Retry'),
+              child: Text(context.l10n.retry),
             ),
           ],
         ),
@@ -369,7 +380,10 @@ class _CallLogsViewState extends State<CallLogsView> {
     );
   }
 
-  Widget _buildCallLogsListWithLoading(BuildContext context, List<CallLog> callLogs) {
+  Widget _buildCallLogsListWithLoading(
+    BuildContext context,
+    List<CallLog> callLogs,
+  ) {
     return ListView.builder(
       controller: _scrollController,
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -385,7 +399,10 @@ class _CallLogsViewState extends State<CallLogsView> {
     );
   }
 
-  Widget _buildPaginationLoadingIndicator(BuildContext context, {bool isLoading = false}) {
+  Widget _buildPaginationLoadingIndicator(
+    BuildContext context, {
+    bool isLoading = false,
+  }) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 24.0),
       child: Column(
@@ -399,7 +416,7 @@ class _CallLogsViewState extends State<CallLogsView> {
             ),
             const SizedBox(height: 12),
             Text(
-              'Loading more call logs...',
+              context.l10n.paginationLoadingMore,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w500,
@@ -413,7 +430,7 @@ class _CallLogsViewState extends State<CallLogsView> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Loading...',
+              context.l10n.paginationLoading,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
@@ -434,7 +451,9 @@ class _CallLogsViewState extends State<CallLogsView> {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                color: Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -445,14 +464,14 @@ class _CallLogsViewState extends State<CallLogsView> {
             ),
             const SizedBox(height: 24),
             Text(
-              'No Call Logs',
+              context.l10n.emptyCallLogsTitle,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 12),
             Text(
-              'No call logs found matching your criteria.',
+              context.l10n.emptyCallLogsMessage,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -485,10 +504,16 @@ class _CallLogsViewState extends State<CallLogsView> {
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    color: _getCallTypeColor(context, callLog.callType).withValues(alpha: 0.15),
+                    color: _getCallTypeColor(
+                      context,
+                      callLog.callType,
+                    ).withValues(alpha: 0.15),
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: _getCallTypeColor(context, callLog.callType).withValues(alpha: 0.3),
+                      color: _getCallTypeColor(
+                        context,
+                        callLog.callType,
+                      ).withValues(alpha: 0.3),
                       width: 1.5,
                     ),
                   ),
@@ -501,7 +526,7 @@ class _CallLogsViewState extends State<CallLogsView> {
                   ),
                 ),
                 const SizedBox(width: 16),
-                
+
                 // Call Details
                 Expanded(
                   child: Column(
@@ -509,19 +534,24 @@ class _CallLogsViewState extends State<CallLogsView> {
                     children: [
                       Text(
                         callLog.displayName,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 4),
-                      if (callLog.number != null && callLog.number != callLog.name) ...[
+                      if (callLog.number != null &&
+                          callLog.number != callLog.name) ...[
                         Text(
                           callLog.number!,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -530,15 +560,24 @@ class _CallLogsViewState extends State<CallLogsView> {
                       Row(
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
-                              color: _getCallTypeColor(context, callLog.callType).withValues(alpha: 0.1),
+                              color: _getCallTypeColor(
+                                context,
+                                callLog.callType,
+                              ).withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
                               callLog.callType.displayName,
                               style: TextStyle(
-                                color: _getCallTypeColor(context, callLog.callType),
+                                color: _getCallTypeColor(
+                                  context,
+                                  callLog.callType,
+                                ),
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12,
                               ),
@@ -548,21 +587,26 @@ class _CallLogsViewState extends State<CallLogsView> {
                           Icon(
                             Icons.access_time,
                             size: 14,
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: 4),
                           Text(
                             callLog.formattedDuration,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
-                            ),
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurfaceVariant,
+                                ),
                           ),
                         ],
                       ),
                     ],
                   ),
                 ),
-                
+
                 // Time and Arrow
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -577,7 +621,9 @@ class _CallLogsViewState extends State<CallLogsView> {
                     const SizedBox(height: 8),
                     Icon(
                       Icons.chevron_right,
-                      color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
                       size: 20,
                     ),
                   ],
@@ -605,8 +651,8 @@ class _CallLogsViewState extends State<CallLogsView> {
       case CallType.voiceMail:
         return Colors.purple;
       case CallType.blocked:
-        return Colors.red;   
-      case CallType.answeredExternally:     
+        return Colors.red;
+      case CallType.answeredExternally:
         return Colors.yellow;
       case CallType.wifiIncoming:
         return Colors.lightBlue;
@@ -616,50 +662,67 @@ class _CallLogsViewState extends State<CallLogsView> {
   }
 
   void _showCallLogDetails(BuildContext context, CallLog callLog) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(
-                  callLog.callType.icon,
-                  size: 24,
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    callLog.displayName,
-                    style: Theme.of(context).textTheme.headlineSmall,
+    unawaited(
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    callLog.callType.icon,
+                    size: 24,
                   ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      callLog.displayName,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              if (callLog.number != null) ...[
+                _buildDetailRow(context.l10n.detailNumber, callLog.number!),
+                const SizedBox(height: 8),
+              ],
+              _buildDetailRow(
+                context.l10n.detailType,
+                callLog.callType.displayName,
+              ),
+              const SizedBox(height: 8),
+              _buildDetailRow(
+                context.l10n.detailDuration,
+                callLog.formattedDuration,
+              ),
+              const SizedBox(height: 8),
+              if (callLog.timestamp != null) ...[
+                _buildDetailRow(
+                  context.l10n.detailTime,
+                  callLog.timestamp!.toString(),
+                ),
+                const SizedBox(height: 8),
+              ],
+              if (callLog.cachedNumberType != null) ...[
+                _buildDetailRow(
+                  context.l10n.detailNumberType,
+                  callLog.cachedNumberType!,
+                ),
+                const SizedBox(height: 8),
+              ],
+              if (callLog.cachedNumberLabel != null) ...[
+                _buildDetailRow(
+                  context.l10n.detailLabel,
+                  callLog.cachedNumberLabel!,
                 ),
               ],
-            ),
-            const SizedBox(height: 16),
-            if (callLog.number != null) ...[
-              _buildDetailRow('Number', callLog.number!),
-              const SizedBox(height: 8),
             ],
-            _buildDetailRow('Type', callLog.callType.displayName),
-            const SizedBox(height: 8),
-            _buildDetailRow('Duration', callLog.formattedDuration),
-            const SizedBox(height: 8),
-            if (callLog.timestamp != null) ...[
-              _buildDetailRow('Time', callLog.timestamp!.toString()),
-              const SizedBox(height: 8),
-            ],
-            if (callLog.cachedNumberType != null) ...[
-              _buildDetailRow('Number Type', callLog.cachedNumberType!),
-              const SizedBox(height: 8),
-            ],
-            if (callLog.cachedNumberLabel != null) ...[
-              _buildDetailRow('Label', callLog.cachedNumberLabel!),
-            ],
-          ],
+          ),
         ),
       ),
     );

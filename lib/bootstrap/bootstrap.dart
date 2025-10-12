@@ -13,9 +13,12 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
       WidgetsFlutterBinding.ensureInitialized();
       Bloc.observer = const AppBlocObserver();
 
+      // Initialize hydrated storage in a web-safe way.
       final storageDir = await getApplicationSupportDirectory();
       HydratedBloc.storage = await HydratedStorage.build(
-        storageDirectory: HydratedStorageDirectory(storageDir.path),
+        storageDirectory: kIsWeb
+            ? HydratedStorageDirectory.web
+            : HydratedStorageDirectory(storageDir.path),
       );
       if (kDebugMode) {
         await HydratedBloc.storage.clear();

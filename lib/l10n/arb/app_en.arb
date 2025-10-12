@@ -35,5 +35,186 @@
         "description": "Call log option text shown in the navigation drawer.",
         "type": "text",
         "placeholders": {}
+    },
+
+    "pageNotFoundTitle": "Page Not Found",
+    "@pageNotFoundTitle": {
+        "description": "Title shown on the Not Found page app bar.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "pageNotFoundMessage": "Can't find a page for: {uri}",
+    "@pageNotFoundMessage": {
+        "description": "Message shown when a route cannot be found, includes the requested URI.",
+        "type": "text",
+        "placeholders": {
+            "uri": { "type": "String" }
+        }
+    },
+
+    "themeSectionTitle": "Theme",
+    "@themeSectionTitle": {
+        "description": "Title label for the Theme section on the Profile page.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "languageSectionTitle": "Language",
+    "@languageSectionTitle": {
+        "description": "Title label for the Language section on the Profile page.",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "callLogsTitle": "Call Logs",
+    "@callLogsTitle": {
+        "description": "Title text displayed at the top of the Call Log page.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "grantPermission": "Grant Permission",
+    "@grantPermission": {
+        "description": "Button label to request call log permission.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "retry": "Retry",
+    "@retry": {
+        "description": "Button label to retry an action.",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "paginationLoadingMore": "Loading more call logs...",
+    "@paginationLoadingMore": {
+        "description": "Status text shown while paginating more call logs.",
+        "type": "text",
+        "placeholders": {}
+    },
+    
+    "paginationLoading": "Loading...",
+    "@paginationLoading": {
+        "description": "Generic loading status text.",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "emptyCallLogsTitle": "No Call Logs",
+    "@emptyCallLogsTitle": {
+        "description": "Title shown when there are no call logs.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyCallLogsMessage": "No call logs found matching your criteria.",
+    "@emptyCallLogsMessage": {
+        "description": "Message shown under the empty state of call logs.",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "detailNumber": "Number",
+    "@detailNumber": {
+        "description": "Label for the phone number field in call log details.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "detailType": "Type",
+    "@detailType": {
+        "description": "Label for the call type field in call log details.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "detailDuration": "Duration",
+    "@detailDuration": {
+        "description": "Label for the call duration field in call log details.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "detailTime": "Time",
+    "@detailTime": {
+        "description": "Label for the call time field in call log details.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "detailNumberType": "Number Type",
+    "@detailNumberType": {
+        "description": "Label for cached number type in call log details.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "detailLabel": "Label",
+    "@detailLabel": {
+        "description": "Label for cached number label in call log details.",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "profileSettingsTitle": "Profile & Settings",
+    "@profileSettingsTitle": {
+        "description": "Title shown at the top of the Profile page.",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "searchCallLogsHint": "Search call logs...",
+    "@searchCallLogsHint": {
+        "description": "Hint text for the search bar in the Call Log page.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "filterByType": "Filter by type",
+    "@filterByType": {
+        "description": "Label above the filter chips indicating filter by call type.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "filterAll": "All",
+    "@filterAll": {
+        "description": "Filter chip label for showing all call types.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "filterIncoming": "Incoming",
+    "@filterIncoming": {
+        "description": "Filter chip label for incoming calls.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "filterOutgoing": "Outgoing",
+    "@filterOutgoing": {
+        "description": "Filter chip label for outgoing calls.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "filterMissed": "Missed",
+    "@filterMissed": {
+        "description": "Filter chip label for missed calls.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "filterRejected": "Rejected",
+    "@filterRejected": {
+        "description": "Filter chip label for rejected calls.",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "permissionRequiredTitle": "Permission Required",
+    "@permissionRequiredTitle": {
+        "description": "Title shown when call log permission is denied.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "permissionRequiredMessage": "This app needs permission to access your call logs to display them.",
+    "@permissionRequiredMessage": {
+        "description": "Message describing the need for call log permission.",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "errorTitle": "Error",
+    "@errorTitle": {
+        "description": "Generic error title used in error UI states.",
+        "type": "text",
+        "placeholders": {}
     }
 }

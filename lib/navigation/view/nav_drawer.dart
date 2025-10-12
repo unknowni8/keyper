@@ -2,11 +2,12 @@ import 'package:app_ui/app_ui.dart' show AppColors, AppLogo, AppSpacing;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:keyper/l10n/l10n.dart';
-import 'package:keyper/theme_selector/view/theme_selector.dart';
+
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});
 
+  // Theme selector removed per UX. Keep content padding constant.
   static const double _contentPadding = AppSpacing.lg;
 
   @override
@@ -36,14 +37,6 @@ class NavDrawer extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: AppLogo.light(),
               ),
-            ),
-            // Theme selector
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: AppSpacing.sm,
-                horizontal: _contentPadding,
-              ),
-              child: const ThemeSelector(),
             ),
             const _NavDrawerDivider(),
             ListTile(

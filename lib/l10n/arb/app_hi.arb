@@ -35,5 +35,186 @@
         "description": "नेविगेशन ड्रॉवर में दिखाया गया कॉल लॉग विकल्प।",
         "type": "text",
         "placeholders": {}
+    },
+
+    "pageNotFoundTitle": "पेज नहीं मिला",
+    "@pageNotFoundTitle": {
+        "description": "नॉट फाउंड पेज के ऐप बार पर दिखाया गया शीर्षक।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "pageNotFoundMessage": "इस URI के लिए पेज नहीं मिला: {uri}",
+    "@pageNotFoundMessage": {
+        "description": "जब कोई रूट नहीं मिलता है तब दिखाया जाने वाला संदेश, जिसमें अनुरोधित URI शामिल होता है।",
+        "type": "text",
+        "placeholders": {
+            "uri": { "type": "String" }
+        }
+    },
+
+    "themeSectionTitle": "थीम",
+    "@themeSectionTitle": {
+        "description": "प्रोफ़ाइल पेज पर थीम सेक्शन का शीर्षक लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "languageSectionTitle": "भाषा",
+    "@languageSectionTitle": {
+        "description": "प्रोफ़ाइल पेज पर भाषा सेक्शन का शीर्षक लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "callLogsTitle": "कॉल लॉग",
+    "@callLogsTitle": {
+        "description": "कॉल लॉग पेज के शीर्ष पर दिखाया गया शीर्षक टेक्स्ट।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "grantPermission": "अनुमति दें",
+    "@grantPermission": {
+        "description": "कॉल लॉग अनुमति का अनुरोध करने के लिए बटन लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "retry": "पुनः प्रयास करें",
+    "@retry": {
+        "description": "किसी कार्रवाई को पुनः प्रयास करने के लिए बटन लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "paginationLoadingMore": "और कॉल लॉग लोड हो रहे हैं...",
+    "@paginationLoadingMore": {
+        "description": "अधिक कॉल लॉग पेजिनेशन के दौरान दिखाया गया स्थिति पाठ।",
+        "type": "text",
+        "placeholders": {}
+    },
+    
+    "paginationLoading": "लोड हो रहा है...",
+    "@paginationLoading": {
+        "description": "सामान्य लोडिंग स्थिति पाठ।",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "emptyCallLogsTitle": "कोई कॉल लॉग नहीं",
+    "@emptyCallLogsTitle": {
+        "description": "जब कॉल लॉग नहीं होते हैं तब दिखाया गया शीर्षक।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyCallLogsMessage": "आपके मानदंडों से मेल खाने वाले कोई कॉल लॉग नहीं मिले।",
+    "@emptyCallLogsMessage": {
+        "description": "कॉल लॉग के खाली अवस्था के तहत दिखाया गया संदेश।",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "detailNumber": "नंबर",
+    "@detailNumber": {
+        "description": "कॉल लॉग विवरण में फोन नंबर फ़ील्ड का लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "detailType": "प्रकार",
+    "@detailType": {
+        "description": "कॉल लॉग विवरण में कॉल प्रकार फ़ील्ड का लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "detailDuration": "अवधि",
+    "@detailDuration": {
+        "description": "कॉल लॉग विवरण में कॉल अवधि फ़ील्ड का लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "detailTime": "समय",
+    "@detailTime": {
+        "description": "कॉल लॉग विवरण में कॉल समय फ़ील्ड का लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "detailNumberType": "नंबर प्रकार",
+    "@detailNumberType": {
+        "description": "कॉल लॉग विवरण में कैश्ड नंबर प्रकार का लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "detailLabel": "लेबल",
+    "@detailLabel": {
+        "description": "कॉल लॉग विवरण में कैश्ड नंबर लेबल का लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "profileSettingsTitle": "प्रोफ़ाइल और सेटिंग्स",
+    "@profileSettingsTitle": {
+        "description": "प्रोफ़ाइल पेज के शीर्ष पर दिखाया गया शीर्षक।",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "searchCallLogsHint": "कॉल लॉग खोजें...",
+    "@searchCallLogsHint": {
+        "description": "कॉल लॉग पेज में सर्च बार के लिए संकेत पाठ।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "filterByType": "प्रकार के अनुसार फ़िल्टर",
+    "@filterByType": {
+        "description": "फ़िल्टर चिप्स के ऊपर प्रदर्शित लेबल जो कॉल प्रकार के अनुसार फ़िल्टर इंगित करता है।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "filterAll": "सभी",
+    "@filterAll": {
+        "description": "सभी कॉल प्रकार दिखाने के लिए फ़िल्टर चिप लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "filterIncoming": "इनकमिंग",
+    "@filterIncoming": {
+        "description": "इनकमिंग कॉल्स के लिए फ़िल्टर चिप लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "filterOutgoing": "आउटगोइंग",
+    "@filterOutgoing": {
+        "description": "आउटगोइंग कॉल्स के लिए फ़िल्टर चिप लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "filterMissed": "मिस्ड",
+    "@filterMissed": {
+        "description": "मिस्ड कॉल्स के लिए फ़िल्टर चिप लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "filterRejected": "अस्वीकृत",
+    "@filterRejected": {
+        "description": "अस्वीकृत कॉल्स के लिए फ़िल्टर चिप लेबल।",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "permissionRequiredTitle": "अनुमति आवश्यक",
+    "@permissionRequiredTitle": {
+        "description": "जब कॉल लॉग अनुमति अस्वीकृत होती है तब दिखाया गया शीर्षक।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "permissionRequiredMessage": "कॉल लॉग प्रदर्शित करने के लिए इस ऐप को आपके कॉल लॉग्स तक पहुंच की अनुमति की आवश्यकता है।",
+    "@permissionRequiredMessage": {
+        "description": "कॉल लॉग अनुमति की आवश्यकता का वर्णन करने वाला संदेश।",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    "errorTitle": "त्रुटि",
+    "@errorTitle": {
+        "description": "त्रुटि UI अवस्था में उपयोग किया जाने वाला सामान्य त्रुटि शीर्षक।",
+        "type": "text",
+        "placeholders": {}
     }
 }
