@@ -1,7 +1,39 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+    "systemOption": "System",
+    "@systemOption": {
+        "description": "The option to use system-wide theme in the theme selector menu",
+        "type": "text",
+        "placeholders": {}
+    },
+    "lightModeOption": "Light",
+    "@lightModeOption": {
+        "description": "The option for light mode in the theme selector menu",
+        "type": "text",
+        "placeholders": {}
+    },
+    "darkModeOption": "Dark",
+    "@darkModeOption": {
+        "description": "The option for dark mode in the theme selector menu",
+        "type": "text",
+        "placeholders": {}
+    },
+    "bottomNavBarDashboard": "Dashboard",
+    "@bottomNavBarDashboard": {
+        "description": "Dashboard text shown in the bottom nav bar widget.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "bottomNavBarProfile": "Profile",
+    "@bottomNavBarProfile": {
+        "description": "Profile text shown in the bottom nav bar widget.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "callLogOption": "Call Log",
+    "@callLogOption": {
+        "description": "Call log option text shown in the navigation drawer.",
+        "type": "text",
+        "placeholders": {}
     }
 }

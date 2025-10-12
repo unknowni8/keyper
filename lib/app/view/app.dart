@@ -1,22 +1,35 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:keyper/counter/counter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keyper/app/routes/routes.dart';
 import 'package:keyper/l10n/l10n.dart';
+import 'package:keyper/theme_selector/bloc/theme_mode_bloc.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        ),
-        useMaterial3: true,
-      ),
+    return BlocProvider(
+      create: (_) => ThemeModeBloc(),
+      child: const AppView(),
+    );
+  }
+}
+
+class AppView extends StatelessWidget {
+  const AppView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final themeMode = context.watch<ThemeModeBloc>().state;
+    return MaterialApp.router(
+      themeMode: themeMode,
+      theme: const AppTheme().themeData,
+      darkTheme: const AppDarkTheme().themeData,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      routerConfig: router,
     );
   }
 }
