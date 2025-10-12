@@ -12,6 +12,7 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topRight: Radius.circular(AppSpacing.lg),
@@ -19,36 +20,45 @@ class NavDrawer extends StatelessWidget {
       ),
       child: Drawer(
         backgroundColor: AppColors.darkBackground,
-        child: ListView(
-          physics: const ClampingScrollPhysics(),
-          padding: const EdgeInsets.only(
-            top: kToolbarHeight,
-            left: AppSpacing.lg,
-            right: AppSpacing.lg,
-            bottom: AppSpacing.xlg,
+        child: Theme(
+          data: theme.copyWith(
+            iconTheme: const IconThemeData(color: AppColors.white),
+            listTileTheme: const ListTileThemeData(
+              iconColor: AppColors.white,
+              textColor: AppColors.white,
+            ),
           ),
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: _contentPadding + AppSpacing.xxs,
-                horizontal: _contentPadding,
-              ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: AppLogo.light(),
-              ),
+          child: ListView(
+            physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.only(
+              top: kToolbarHeight,
+              left: AppSpacing.lg,
+              right: AppSpacing.lg,
+              bottom: AppSpacing.xlg,
             ),
-            const _NavDrawerDivider(),
-            ListTile(
-              leading: const Icon(Icons.call_outlined),
-              title: Text(context.l10n.callLogOption),
-              onTap: () {
-                context
-                  ..pop()
-                  ..goNamed('call_log');
-              },
-            ),
-          ],
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: _contentPadding + AppSpacing.xxs,
+                  horizontal: _contentPadding,
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppLogo.light(),
+                ),
+              ),
+              const _NavDrawerDivider(),
+              ListTile(
+                leading: const Icon(Icons.call_outlined),
+                title: Text(context.l10n.callLogOption),
+                onTap: () {
+                  context
+                    ..pop()
+                    ..goNamed('call_log');
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -60,6 +70,9 @@ class _NavDrawerDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Divider(color: AppColors.outlineOnDark);
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+      child: Divider(color: AppColors.outlineOnDark),
+    );
   }
 }

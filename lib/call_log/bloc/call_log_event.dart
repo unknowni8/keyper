@@ -38,4 +38,3 @@ class FilterCallLogsByType extends CallLogEvent {
 class RequestPermission extends CallLogEvent {
   const RequestPermission();
 }
-

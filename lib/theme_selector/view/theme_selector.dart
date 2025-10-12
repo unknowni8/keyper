@@ -17,6 +17,7 @@ class ThemeSelector extends StatelessWidget {
     final theme = Theme.of(context);
     final themeMode = context.watch<ThemeModeBloc>().state;
     final chipColor = theme.colorScheme.primary;
+    final onPrimary = theme.colorScheme.onPrimary;
 
     Widget buildChip({
       required ThemeMode value,
@@ -37,13 +38,13 @@ class ThemeSelector extends StatelessWidget {
             Icon(
               icon,
               size: 16,
-              color: isSelected ? Colors.white : chipColor,
+              color: isSelected ? onPrimary : chipColor,
             ),
             const SizedBox(width: 6),
             Text(
               label,
               style: TextStyle(
-                color: isSelected ? Colors.white : chipColor,
+                color: isSelected ? onPrimary : chipColor,
                 fontWeight: FontWeight.w600,
                 fontSize: 13,
               ),
@@ -52,7 +53,7 @@ class ThemeSelector extends StatelessWidget {
         ),
         backgroundColor: chipColor.withValues(alpha: 0.1),
         selectedColor: chipColor,
-        checkmarkColor: Colors.white,
+        checkmarkColor: onPrimary,
         elevation: isSelected ? 2 : 0,
         shadowColor: chipColor.withValues(alpha: 0.3),
         shape: RoundedRectangleBorder(
@@ -72,7 +73,11 @@ class ThemeSelector extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.colorScheme.surface.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.outlineOnDark.withValues(alpha: 0.2)),
+        border: Border.all(
+          color: AppColors.outlineOnDark.withValues(
+            alpha: 0.2,
+          ),
+        ),
       ),
       child: Wrap(
         spacing: AppSpacing.sm,

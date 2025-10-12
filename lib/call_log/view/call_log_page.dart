@@ -93,21 +93,17 @@ class _CallLogsViewState extends State<CallLogsView> {
           Expanded(
             child: BlocBuilder<CallLogBloc, CallLogState>(
               builder: (context, state) {
-                switch (state.runtimeType) {
-                  case CallLogPermissionDenied:
+                switch (state) {
+                  case CallLogPermissionDenied():
                     return _buildPermissionDenied(context);
-                  case CallLogError:
-                    return _buildError(
-                      context,
-                      (state as CallLogError).message,
-                    );
-                  case CallLogLoaded:
-                    return _buildCallLogsList(context, state as CallLogLoaded);
-                  case CallLogLoadingMore:
-                    final loadingMoreState = state as CallLogLoadingMore;
+                  case CallLogError():
+                    return _buildError(context, state.message);
+                  case CallLogLoaded():
+                    return _buildCallLogsList(context, state);
+                  case CallLogLoadingMore():
                     return _buildCallLogsListWithLoading(
                       context,
-                      loadingMoreState.currentLogs,
+                      state.currentLogs,
                     );
                   default:
                     return const Center(child: CircularProgressIndicator());
@@ -244,6 +240,7 @@ class _CallLogsViewState extends State<CallLogsView> {
     Color? color,
   }) {
     final chipColor = color ?? Theme.of(context).colorScheme.primary;
+    final onPrimary = Theme.of(context).colorScheme.onPrimary;
 
     return FilterChip(
       label: Row(
@@ -252,13 +249,13 @@ class _CallLogsViewState extends State<CallLogsView> {
           Icon(
             icon,
             size: 16,
-            color: isSelected ? Colors.white : chipColor,
+            color: isSelected ? onPrimary : chipColor,
           ),
           const SizedBox(width: 6),
           Text(
             label,
             style: TextStyle(
-              color: isSelected ? Colors.white : chipColor,
+              color: isSelected ? onPrimary : chipColor,
               fontWeight: FontWeight.w600,
               fontSize: 13,
             ),
@@ -269,7 +266,7 @@ class _CallLogsViewState extends State<CallLogsView> {
       onSelected: (_) => onSelected(),
       backgroundColor: chipColor.withValues(alpha: 0.1),
       selectedColor: chipColor,
-      checkmarkColor: Colors.white,
+      checkmarkColor: onPrimary,
       elevation: isSelected ? 4 : 0,
       shadowColor: chipColor.withValues(alpha: 0.3),
       shape: RoundedRectangleBorder(
@@ -286,7 +283,7 @@ class _CallLogsViewState extends State<CallLogsView> {
   Widget _buildPermissionDenied(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -322,7 +319,7 @@ class _CallLogsViewState extends State<CallLogsView> {
   Widget _buildError(BuildContext context, String message) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -404,7 +401,7 @@ class _CallLogsViewState extends State<CallLogsView> {
     bool isLoading = false,
   }) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 24.0),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -444,7 +441,7 @@ class _CallLogsViewState extends State<CallLogsView> {
   Widget _buildEmptyState(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32.0),
+        padding: const EdgeInsets.all(32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

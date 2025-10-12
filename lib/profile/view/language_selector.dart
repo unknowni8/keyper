@@ -11,6 +11,7 @@ class LanguageSelector extends StatelessWidget {
     final theme = Theme.of(context);
     final locale = context.watch<LocaleCubit>().state;
     final chipColor = theme.colorScheme.primary;
+    final onPrimary = theme.colorScheme.onPrimary;
 
     Widget buildChip({
       required Locale value,
@@ -21,12 +22,11 @@ class LanguageSelector extends StatelessWidget {
       return ChoiceChip(
         key: key,
         selected: isSelected,
-        onSelected: (_) =>
-            context.read<LocaleCubit>().setLocale(value),
+        onSelected: (_) => context.read<LocaleCubit>().setLocale(value),
         label: Text(
           label,
           style: TextStyle(
-            color: isSelected ? Colors.white : chipColor,
+            color: isSelected ? onPrimary : chipColor,
             fontWeight: FontWeight.w600,
             fontSize: 13,
           ),
@@ -38,9 +38,7 @@ class LanguageSelector extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
           side: BorderSide(
-            color: isSelected
-                ? chipColor
-                : chipColor.withValues(alpha: 0.3),
+            color: isSelected ? chipColor : chipColor.withValues(alpha: 0.3),
             width: 1.5,
           ),
         ),

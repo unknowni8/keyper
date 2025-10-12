@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keyper/app/routes/routes.dart';
 import 'package:keyper/l10n/l10n.dart';
-import 'package:keyper/theme_selector/bloc/theme_mode_bloc.dart';
 import 'package:keyper/profile/bloc/locale_cubit.dart';
+import 'package:keyper/theme_selector/bloc/theme_mode_bloc.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

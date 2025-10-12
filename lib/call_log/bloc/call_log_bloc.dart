@@ -45,8 +45,12 @@ class CallLogBloc extends Bloc<CallLogEvent, CallLogState> {
         hasMore: hasMore,
       ));
 
-    } catch (e) {
-      AppLogger.error('Error loading call logs', tag: 'CALL_LOGS_BLOC', error: e);
+    } on Exception catch (e) {
+      AppLogger.error(
+        'Error loading call logs',
+        tag: 'CALL_LOGS_BLOC',
+        error: e,
+      );
       emit(CallLogError('Failed to load call logs: $e'));
     }
   }
@@ -69,8 +73,12 @@ class CallLogBloc extends Bloc<CallLogEvent, CallLogState> {
         hasMore: hasMore,
       ));
 
-    } catch (e) {
-      AppLogger.error('Error refreshing call logs', tag: 'CALL_LOGS_BLOC', error: e);
+    } on Exception catch (e) {
+      AppLogger.error(
+        'Error refreshing call logs',
+        tag: 'CALL_LOGS_BLOC',
+        error: e,
+      );
       emit(CallLogError('Failed to refresh call logs: $e'));
     }
   }
@@ -110,8 +118,12 @@ class CallLogBloc extends Bloc<CallLogEvent, CallLogState> {
         hasMore: hasMore,
       ));
 
-    } catch (e) {
-      AppLogger.error('Error loading more call logs', tag: 'CALL_LOGS_BLOC', error: e);
+    } on Exception catch (e) {
+      AppLogger.error(
+        'Error loading more call logs',
+        tag: 'CALL_LOGS_BLOC',
+        error: e,
+      );
       emit(CallLogError('Failed to load more call logs: $e'));
     }
   }
@@ -135,8 +147,12 @@ class CallLogBloc extends Bloc<CallLogEvent, CallLogState> {
         searchQuery: event.query,
       ));
 
-    } catch (e) {
-      AppLogger.error('Error searching call logs', tag: 'CALL_LOGS_BLOC', error: e);
+    } on Exception catch (e) {
+      AppLogger.error(
+        'Error searching call logs',
+        tag: 'CALL_LOGS_BLOC',
+        error: e,
+      );
       emit(CallLogError('Failed to search call logs: $e'));
     }
   }
@@ -167,8 +183,12 @@ class CallLogBloc extends Bloc<CallLogEvent, CallLogState> {
         filterType: event.callType,
       ));
 
-    } catch (e) {
-      AppLogger.error('Error filtering call logs', tag: 'CALL_LOGS_BLOC', error: e);
+    } on Exception catch (e) {
+      AppLogger.error(
+        'Error filtering call logs',
+        tag: 'CALL_LOGS_BLOC',
+        error: e,
+      );
       emit(CallLogError('Failed to filter call logs: $e'));
     }
   }
@@ -185,8 +205,12 @@ class CallLogBloc extends Bloc<CallLogEvent, CallLogState> {
       } else {
         emit(const CallLogPermissionDenied());
       }
-    } catch (e) {
-      AppLogger.error('Error requesting permission', tag: 'CALL_LOGS_BLOC', error: e);
+    } on Exception catch (e) {
+      AppLogger.error(
+        'Error requesting permission',
+        tag: 'CALL_LOGS_BLOC',
+        error: e,
+      );
       emit(CallLogError('Failed to request permission: $e'));
     }
   }
