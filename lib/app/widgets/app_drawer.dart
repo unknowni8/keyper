@@ -2,8 +2,8 @@ import 'package:app_ui/app_ui.dart' show AppLogo, AppSpacing;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:keyper/app/bloc/bloc.dart';
 import 'package:keyper/l10n/l10n.dart';
-import 'package:keyper/navigation/bloc/bloc.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
@@ -26,6 +26,7 @@ class _AppDrawerState extends State<AppDrawer> {
           return NavigationDrawer(
             selectedIndex: index,
             onDestinationSelected: (value) {
+              
               context.read<NavigationCubit>().update(value);
               context.pop();
             },

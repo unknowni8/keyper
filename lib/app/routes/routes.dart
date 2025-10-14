@@ -2,22 +2,31 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:keyper/app/app.dart';
-import 'package:keyper/app/view/app_shell.dart';
 import 'package:keyper/call_log/view/call_log_page.dart';
-import 'package:keyper/dashboard/dashboard.dart';
+import 'package:keyper/features/features.dart';
+import 'package:keyper/home/home.dart';
 import 'package:keyper/profile/profile.dart';
+import 'package:keyper/timeline/timeline.dart';
+import 'package:keyper/vault/vault.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
   debugLabel: 'root',
 );
-final GlobalKey<NavigatorState> _dashboardNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'dashboardNavigator');
-
-final GlobalKey<NavigatorState> _callLogNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'callLogNavigator');
-
+final GlobalKey<NavigatorState> _homeNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: 'homeNavigator',
+);
+final GlobalKey<NavigatorState> _featuresNavigatorKey =
+    GlobalKey<NavigatorState>(
+      debugLabel: 'featuresNavigator',
+    );
+final GlobalKey<NavigatorState> _timelineNavigatorKey =
+    GlobalKey<NavigatorState>(
+      debugLabel: 'timelineNavigator',
+    );
 final GlobalKey<NavigatorState> _profileNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'profileNavigator');
+    GlobalKey<NavigatorState>(
+      debugLabel: 'profileNavigator',
+    );
 
 final GoRouter router = GoRouter(
   initialLocation: '/',
@@ -36,28 +45,49 @@ final GoRouter router = GoRouter(
             // Return the widget that implements the custom shell (in this case
             // using a BottomNavigationBar). The StatefulNavigationShell is
             // passed
-            // to be able access the state of the shell and to navigate to other
-            // branches in a stateful way.
+            // to the builder.
             return AppShell(navigationShell: navigationShell);
           },
       branches: [
         StatefulShellBranch(
-          navigatorKey: _dashboardNavigatorKey,
+          navigatorKey: _homeNavigatorKey,
           routes: [
             GoRoute(
               path: '/',
-              name: 'dashboard',
-              builder: (context, state) => const DashboardPage(),
+              name: 'home',
+              builder: (context, state) => const HomePage(),
             ),
           ],
         ),
         StatefulShellBranch(
-          navigatorKey: _callLogNavigatorKey,
+          navigatorKey: _featuresNavigatorKey,
           routes: [
             GoRoute(
-              path: '/call_log',
-              name: 'call_log',
-              builder: (context, state) => const CallLogPage(),
+              path: '/features',
+              name: 'features',
+              builder: (context, state) => const FeaturesPage(),
+              routes: [
+                GoRoute(
+                  path: 'features/call_log',
+                  name: 'call_log',
+                  builder: (context, state) => const CallLogPage(),
+                ),
+                GoRoute(
+                  path: 'features/vault',
+                  name: 'vault',
+                  builder: (context, state) => const VaultPage(),
+                ),
+              ]
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          navigatorKey: _timelineNavigatorKey,
+          routes: [
+            GoRoute(
+              path: '/timeline',
+              name: 'timeline',
+              builder: (context, state) => const TimelinePage(),
             ),
           ],
         ),

@@ -18,15 +18,27 @@
         "type": "text",
         "placeholders": {}
     },
-    "bottomNavBarDashboard": "डैशबोर्ड",
-    "@bottomNavBarDashboard": {
-        "description": "बॉटम नेविगेशन बार विजेट में दिखाया गया डैशबोर्ड टेक्स्ट।",
+    "bottomNavBarHome": "होम",
+    "@bottomNavBarHome": {
+        "description": "बॉटम नेविगेशन बार विजेट में दिखाया गया होम टेक्स्ट।",
         "type": "text",
         "placeholders": {}
     },
     "bottomNavBarProfile": "प्रोफ़ाइल",
     "@bottomNavBarProfile": {
         "description": "बॉटम नेविगेशन बार विजेट में दिखाया गया प्रोफ़ाइल टेक्स्ट।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "bottomNavBarFeatures": "विशेषताएं",
+    "@bottomNavBarFeatures": {
+        "description": "बॉटम नेविगेशन बार विजेट में दिखाया गया विशेषताएं टेक्स्ट।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "bottomNavBarTimeline": "टाइमलाइन",
+    "@bottomNavBarTimeline": {
+        "description": "बॉटम नेविगेशन बार विजेट में दिखाया गया टाइमलाइन टेक्स्ट।",
         "type": "text",
         "placeholders": {}
     },

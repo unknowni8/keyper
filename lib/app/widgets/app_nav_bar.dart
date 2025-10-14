@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:keyper/l10n/l10n.dart';
 
-@visibleForTesting
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
     required this.navigationShell,
@@ -24,7 +23,6 @@ class BottomNavBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(28),
           border: Border.all(
             color: theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
-            width: 1,
           ),
           boxShadow: [
             BoxShadow(
@@ -42,18 +40,24 @@ class BottomNavBar extends StatelessWidget {
             labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
             backgroundColor: Colors.transparent,
             elevation: 0,
-            indicatorColor:
-                theme.colorScheme.primaryContainer.withValues(alpha: 0.9),
+            indicatorColor: theme.colorScheme.primaryContainer.withValues(
+              alpha: 0.9,
+            ),
             destinations: [
               NavigationDestination(
-                icon: const Icon(Icons.dashboard_outlined),
-                selectedIcon: const Icon(Icons.dashboard),
-                label: context.l10n.bottomNavBarDashboard,
+                icon: const Icon(Icons.home_outlined),
+                selectedIcon: const Icon(Icons.home),
+                label: context.l10n.bottomNavBarHome,
               ),
               NavigationDestination(
-                icon: const Icon(Icons.call_outlined),
-                selectedIcon: const Icon(Icons.call),
-                label: context.l10n.callLogOption,
+                icon: const Icon(Icons.apps_outlined),
+                selectedIcon: const Icon(Icons.apps),
+                label: context.l10n.bottomNavBarFeatures,
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.timeline_outlined),
+                selectedIcon: const Icon(Icons.timeline),
+                label: context.l10n.bottomNavBarTimeline,
               ),
               NavigationDestination(
                 icon: const Icon(Icons.person_outline),

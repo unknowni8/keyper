@@ -1,2 +1,4 @@
-export 'view/app.dart';
-export 'view/not_found.dart';
+export 'bloc/bloc.dart';
+export 'routes/routes.dart';
+export 'view/view.dart';
+export 'widgets/widgets.dart';
