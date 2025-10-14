@@ -13,6 +13,9 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
 final GlobalKey<NavigatorState> _dashboardNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'dashboardNavigator');
 
+final GlobalKey<NavigatorState> _callLogNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'callLogNavigator');
+
 final GlobalKey<NavigatorState> _profileNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'profileNavigator');
 
@@ -45,14 +48,16 @@ final GoRouter router = GoRouter(
               path: '/',
               name: 'dashboard',
               builder: (context, state) => const DashboardPage(),
-              routes: [
-                GoRoute(
-                  parentNavigatorKey: _rootNavigatorKey,
-                  path: '/call_log',
-                  name: 'call_log',
-                  builder: (context, state) => const CallLogPage(),
-                ),
-              ],
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          navigatorKey: _callLogNavigatorKey,
+          routes: [
+            GoRoute(
+              path: '/call_log',
+              name: 'call_log',
+              builder: (context, state) => const CallLogPage(),
             ),
           ],
         ),

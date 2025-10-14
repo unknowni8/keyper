@@ -29,6 +29,7 @@ class AppView extends StatelessWidget {
     final themeMode = context.watch<ThemeModeBloc>().state;
     final locale = context.watch<LocaleCubit>().state;
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       themeMode: themeMode,
       theme: const AppTheme().themeData,
       darkTheme: const AppDarkTheme().themeData,

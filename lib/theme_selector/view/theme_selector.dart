@@ -1,4 +1,4 @@
-import 'package:app_ui/app_ui.dart';
+import 'package:app_logger/app_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keyper/l10n/l10n.dart';
@@ -14,95 +14,45 @@ class ThemeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final theme = Theme.of(context);
     final themeMode = context.watch<ThemeModeBloc>().state;
-    final chipColor = theme.colorScheme.primary;
-    final onPrimary = theme.colorScheme.onPrimary;
-
-    Widget buildChip({
-      required ThemeMode value,
-      required IconData icon,
-      required String label,
-      required Key key,
-    }) {
-      final isSelected = themeMode == value;
-      return ChoiceChip(
-        key: key,
-        selected: isSelected,
-        onSelected: (_) {
-          context.read<ThemeModeBloc>().add(ThemeModeChanged(value));
-        },
-        label: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              size: 16,
-              color: isSelected ? onPrimary : chipColor,
-            ),
-            const SizedBox(width: 6),
-            Text(
-              label,
-              style: TextStyle(
-                color: isSelected ? onPrimary : chipColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 13,
+    AppLogger.info('ThemeSelector.build: themeMode = $themeMode');
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        ListTile(
+          key: const Key('themeSelector_system'),
+          leading: const Icon(Icons.brightness_auto, size: 20),
+          title: Text(l10n.systemOption),
+          trailing: themeMode == ThemeMode.system
+              ? const Icon(Icons.check, color: Colors.blue)
+              : null,
+          onTap: () => context.read<ThemeModeBloc>().add(
+                const ThemeModeChanged(ThemeMode.system),
               ),
-            ),
-          ],
         ),
-        backgroundColor: chipColor.withValues(alpha: 0.1),
-        selectedColor: chipColor,
-        checkmarkColor: onPrimary,
-        elevation: isSelected ? 2 : 0,
-        shadowColor: chipColor.withValues(alpha: 0.3),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(
-            color: isSelected ? chipColor : chipColor.withValues(alpha: 0.3),
-            width: 1.5,
-          ),
+        ListTile(
+          key: const Key('themeSelector_light'),
+          leading: const Icon(Icons.wb_sunny_outlined, size: 20),
+          title: Text(l10n.lightModeOption),
+          trailing: themeMode == ThemeMode.light
+              ? const Icon(Icons.check, color: Colors.blue)
+              : null,
+          onTap: () => context.read<ThemeModeBloc>().add(
+                const ThemeModeChanged(ThemeMode.light),
+              ),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      );
-    }
-
-    return Container(
-      key: const Key('themeSelector_dropdown'),
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withValues(alpha: 0.06),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: AppColors.outlineOnDark.withValues(
-            alpha: 0.2,
-          ),
+        ListTile(
+          key: const Key('themeSelector_dark'),
+          leading: const Icon(Icons.nightlight_round, size: 20),
+          title: Text(l10n.darkModeOption),
+          trailing: themeMode == ThemeMode.dark
+              ? const Icon(Icons.check, color: Colors.blue)
+              : null,
+          onTap: () => context.read<ThemeModeBloc>().add(
+                const ThemeModeChanged(ThemeMode.dark),
+              ),
         ),
-      ),
-      child: Wrap(
-        spacing: AppSpacing.sm,
-        runSpacing: AppSpacing.xs,
-        children: [
-          buildChip(
-            value: ThemeMode.system,
-            icon: Icons.brightness_auto,
-            label: l10n.systemOption,
-            key: const Key('themeSelector_system_dropdownMenuItem'),
-          ),
-          buildChip(
-            value: ThemeMode.light,
-            icon: Icons.wb_sunny_outlined,
-            label: l10n.lightModeOption,
-            key: const Key('themeSelector_light_dropdownMenuItem'),
-          ),
-          buildChip(
-            value: ThemeMode.dark,
-            icon: Icons.nightlight_round,
-            label: l10n.darkModeOption,
-            key: const Key('themeSelector_dark_dropdownMenuItem'),
-          ),
-        ],
-      ),
+      ],
     );
   }
 }

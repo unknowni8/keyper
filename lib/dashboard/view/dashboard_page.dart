@@ -8,7 +8,6 @@ class DashboardPage extends StatelessWidget {
     return const Center(
       child: Text(
         'Dashboard Placeholder',
-        textAlign: TextAlign.center,
       ),
     );
   }

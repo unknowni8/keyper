@@ -77,6 +77,9 @@ abstract class AppColors {
   /// The background color.
   static const Color background = Color(0xFFFFFFFF);
 
+  /// Light surface color.
+  static const Color surface = Color(0xFFFFFFFF);
+
   /// The dark background color.
   static const Color darkBackground = Color(0xFF001F28);
 
@@ -84,7 +87,11 @@ abstract class AppColors {
   static const Color onBackground = Color(0xFF1A1A1A);
 
   /// The primary container color.
+  /// The primary container color.
   static const Color primaryContainer = Color(0xFFB1EBFF);
+
+  /// The primary container color for dark mode.
+  static const Color primaryContainerDark = Color(0xFF004D62);
 
   /// The dark text 1 color.
   static const Color darkText1 = Color(0xFFFCFCFC);
@@ -156,4 +163,22 @@ abstract class AppColors {
 
   /// The orange color.
   static const Color orange = Color(0xFFFB8B24);
+
+  /// Dark surface color.
+  static const Color surfaceDark = Color(0xFF191C1D);
+
+  /// Light on-surface color (text/icons on light surfaces).
+  static const Color onSurfaceLight = onBackground;
+
+  /// Dark on-surface color (text/icons on dark surfaces).
+  static const Color onSurfaceDark = darkText1;
+
+  /// Input hover color for dark mode.
+  static const Color inputHoverDark = Color(0xFF2A2A2A);
+
+  /// Input focused color for dark mode.
+  static const Color inputFocusedDark = Color(0xFF3A3A3A);
+
+  /// Input enabled color for dark mode.
+  static const Color inputEnabledDark = Color(0xFF1F1F1F);
 }

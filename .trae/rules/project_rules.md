@@ -1,0 +1,2 @@
+1. Always use connected mobile device to test run app using this "flutter run --flavor development --target lib/main_development.dart" command.
+2. If mobile device is not connected, then skip this step. And use "flutter analyze" command to check for any error.

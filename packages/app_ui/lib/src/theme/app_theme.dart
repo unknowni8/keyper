@@ -12,6 +12,7 @@ class AppTheme {
   /// Default `ThemeData` for App UI.
   ThemeData get themeData {
     return ThemeData(
+      brightness: Brightness.light,
       primaryColor: AppColors.blue,
       canvasColor: _backgroundColor,
       scaffoldBackgroundColor: _backgroundColor,
@@ -31,23 +32,28 @@ class AppTheme {
       switchTheme: _switchTheme,
       progressIndicatorTheme: _progressIndicatorTheme,
       tabBarTheme: _tabBarTheme,
-      bottomNavigationBarTheme: _bottomAppBarTheme,
+      bottomNavigationBarTheme: _bottomNavigationBarTheme,
       chipTheme: _chipTheme,
     );
   }
 
   ColorScheme get _colorScheme {
     return ColorScheme.light(
+      primary: AppColors.blue,
       secondary: AppColors.secondary,
       surface: _backgroundColor,
+      // background removed: use surface instead
+      // onBackground removed: use onSurface instead
+      onPrimary: AppColors.white,
+      onSecondary: AppColors.white,
+      onSurface: AppColors.onBackground,
+      outline: AppColors.outlineLight,
     );
   }
 
   SnackBarThemeData get _snackBarTheme {
     return SnackBarThemeData(
-      contentTextStyle: UITextStyle.bodyText1.copyWith(
-        color: AppColors.white,
-      ),
+      contentTextStyle: UITextStyle.bodyText1.copyWith(color: AppColors.white),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSpacing.sm),
       ),
@@ -75,64 +81,62 @@ class AppTheme {
   }
 
   IconThemeData get _iconTheme {
-    return const IconThemeData(
-      color: AppColors.onBackground,
-    );
+    return const IconThemeData(color: AppColors.onBackground);
   }
 
   DividerThemeData get _dividerTheme {
     return const DividerThemeData(
       color: AppColors.outlineLight,
-      space: AppSpacing.lg,
+      space: AppSpacing.xlg,
       thickness: AppSpacing.xxxs,
-      indent: AppSpacing.lg,
-      endIndent: AppSpacing.lg,
     );
   }
 
   TextTheme get _textTheme => uiTextTheme;
 
   /// The Content text theme based on [ContentTextStyle].
-  static final contentTextTheme = TextTheme(
-    displayLarge: ContentTextStyle.headline1,
-    displayMedium: ContentTextStyle.headline2,
-    displaySmall: ContentTextStyle.headline3,
-    headlineMedium: ContentTextStyle.headline4,
-    headlineSmall: ContentTextStyle.headline5,
-    titleLarge: ContentTextStyle.headline6,
-    titleMedium: ContentTextStyle.subtitle1,
-    titleSmall: ContentTextStyle.subtitle2,
-    bodyLarge: ContentTextStyle.bodyText1,
-    bodyMedium: ContentTextStyle.bodyText2,
-    labelLarge: ContentTextStyle.button,
-    bodySmall: ContentTextStyle.caption,
-    labelSmall: ContentTextStyle.overline,
-  ).apply(
-    bodyColor: AppColors.black,
-    displayColor: AppColors.black,
-    decorationColor: AppColors.black,
-  );
+  static final contentTextTheme =
+      TextTheme(
+        displayLarge: ContentTextStyle.headline1,
+        displayMedium: ContentTextStyle.headline2,
+        displaySmall: ContentTextStyle.headline3,
+        headlineMedium: ContentTextStyle.headline4,
+        headlineSmall: ContentTextStyle.headline5,
+        titleLarge: ContentTextStyle.headline6,
+        titleMedium: ContentTextStyle.subtitle1,
+        titleSmall: ContentTextStyle.subtitle2,
+        bodyLarge: ContentTextStyle.bodyText1,
+        bodyMedium: ContentTextStyle.bodyText2,
+        labelLarge: ContentTextStyle.button,
+        bodySmall: ContentTextStyle.caption,
+        labelSmall: ContentTextStyle.overline,
+      ).apply(
+        bodyColor: AppColors.onBackground,
+        displayColor: AppColors.onBackground,
+        decorationColor: AppColors.onBackground,
+      );
 
   /// The UI text theme based on [UITextStyle].
-  static final uiTextTheme = TextTheme(
-    displayLarge: UITextStyle.headline1,
-    displayMedium: UITextStyle.headline2,
-    displaySmall: UITextStyle.headline3,
-    headlineMedium: UITextStyle.headline4,
-    headlineSmall: UITextStyle.headline5,
-    titleLarge: UITextStyle.headline6,
-    titleMedium: UITextStyle.subtitle1,
-    titleSmall: UITextStyle.subtitle2,
-    bodyLarge: UITextStyle.bodyText1,
-    bodyMedium: UITextStyle.bodyText2,
-    labelLarge: UITextStyle.button,
-    bodySmall: UITextStyle.caption,
-    labelSmall: UITextStyle.overline,
-  ).apply(
-    bodyColor: AppColors.black,
-    displayColor: AppColors.black,
-    decorationColor: AppColors.black,
-  );
+  static final uiTextTheme =
+      TextTheme(
+        displayLarge: UITextStyle.headline1,
+        displayMedium: UITextStyle.headline2,
+        displaySmall: UITextStyle.headline3,
+        headlineMedium: UITextStyle.headline4,
+        headlineSmall: UITextStyle.headline5,
+        titleLarge: UITextStyle.headline6,
+        titleMedium: UITextStyle.subtitle1,
+        titleSmall: UITextStyle.subtitle2,
+        bodyLarge: UITextStyle.bodyText1,
+        bodyMedium: UITextStyle.bodyText2,
+        labelLarge: UITextStyle.button,
+        bodySmall: UITextStyle.caption,
+        labelSmall: UITextStyle.overline,
+      ).apply(
+        bodyColor: AppColors.onBackground,
+        displayColor: AppColors.onBackground,
+        decorationColor: AppColors.onBackground,
+      );
 
   InputDecorationTheme get _inputDecorationTheme {
     return InputDecorationTheme(
@@ -202,7 +206,7 @@ class AppTheme {
   }
 
   ListTileThemeData get _listTileTheme {
-    return const ListTileThemeData(
+    return ListTileThemeData(
       iconColor: AppColors.onBackground,
       contentPadding: EdgeInsets.all(AppSpacing.lg),
     );
@@ -222,8 +226,9 @@ class AppTheme {
         }
         return AppColors.grey;
       }),
-      trackOutlineColor:
-          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+      trackOutlineColor: WidgetStateProperty.resolveWith((
+        Set<WidgetState> states,
+      ) {
         if (states.contains(WidgetState.selected)) {
           return AppColors.primaryContainer;
         }
@@ -250,35 +255,27 @@ class AppTheme {
       unselectedLabelStyle: UITextStyle.button,
       unselectedLabelColor: AppColors.mediumEmphasisSurface,
       indicator: const UnderlineTabIndicator(
-        borderSide: BorderSide(
-          width: 3,
-          color: AppColors.darkAqua,
-        ),
+        borderSide: BorderSide(width: 3, color: AppColors.darkAqua),
       ),
       indicatorSize: TabBarIndicatorSize.label,
     );
   }
-}
 
-InputBorder get _textFieldBorder => const UnderlineInputBorder(
-      borderSide: BorderSide(
-        width: 1.5,
-        color: AppColors.darkAqua,
-      ),
+  BottomNavigationBarThemeData get _bottomNavigationBarTheme {
+    return BottomNavigationBarThemeData(
+      backgroundColor: AppColors.background,
+      selectedItemColor: AppColors.darkAqua,
+      unselectedItemColor: AppColors.onSurfaceLight.withValues(alpha: 0.74),
     );
+  }
 
-BottomNavigationBarThemeData get _bottomAppBarTheme {
-  return BottomNavigationBarThemeData(
-    backgroundColor: AppColors.darkBackground,
-    selectedItemColor: AppColors.white,
-    unselectedItemColor: AppColors.white.withValues(alpha: 0.74),
+  InputBorder get _textFieldBorder => const UnderlineInputBorder(
+    borderSide: BorderSide(width: 1.5, color: AppColors.darkAqua),
   );
-}
 
-ChipThemeData get _chipTheme {
-  return const ChipThemeData(
-    backgroundColor: AppColors.transparent,
-  );
+  ChipThemeData get _chipTheme {
+    return const ChipThemeData(backgroundColor: AppColors.primaryContainer);
+  }
 }
 
 /// {@template app_dark_theme}
@@ -289,17 +286,41 @@ class AppDarkTheme extends AppTheme {
   const AppDarkTheme();
 
   @override
+  ThemeData get themeData => ThemeData.dark().copyWith(
+    brightness: Brightness.dark,
+    colorScheme: _colorScheme,
+    textTheme: _textTheme,
+    bottomSheetTheme: _bottomSheetTheme,
+    chipTheme: _chipTheme,
+    listTileTheme: _listTileTheme,
+    switchTheme: _switchTheme,
+    progressIndicatorTheme: _progressIndicatorTheme,
+    tabBarTheme: _tabBarTheme,
+    bottomNavigationBarTheme: _bottomNavigationBarTheme,
+    buttonTheme: _buttonTheme,
+    elevatedButtonTheme: _elevatedButtonTheme,
+    textButtonTheme: _textButtonTheme,
+    dividerTheme: _dividerTheme,
+  );
+
+  @override
   ColorScheme get _colorScheme {
     return const ColorScheme.dark().copyWith(
-      primary: AppColors.white,
+      primary: AppColors.blue,
       secondary: AppColors.secondary,
-      surface: AppColors.grey.shade900,
+      surface: AppColors.surfaceDark,
+      // background removed: use surface instead
+      onPrimary: AppColors.white,
+      onSecondary: AppColors.white,
+      onSurface: AppColors.onSurfaceDark,
+      // onBackground removed: use onSurface instead
+      outline: AppColors.outlineOnDark,
     );
   }
 
   @override
   TextTheme get _textTheme {
-    return AppTheme.contentTextTheme.apply(
+    return AppTheme.uiTextTheme.apply(
       bodyColor: AppColors.white,
       displayColor: AppColors.white,
       decorationColor: AppColors.white,
@@ -309,9 +330,7 @@ class AppDarkTheme extends AppTheme {
   @override
   SnackBarThemeData get _snackBarTheme {
     return SnackBarThemeData(
-      contentTextStyle: UITextStyle.bodyText1.copyWith(
-        color: AppColors.black,
-      ),
+      contentTextStyle: UITextStyle.bodyText1.copyWith(color: AppColors.black),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSpacing.sm),
       ),
@@ -345,11 +364,114 @@ class AppDarkTheme extends AppTheme {
   @override
   DividerThemeData get _dividerTheme {
     return const DividerThemeData(
-      color: AppColors.onBackground,
-      space: AppSpacing.lg,
+      color: AppColors.outlineOnDark,
+      space: AppSpacing.xlg,
       thickness: AppSpacing.xxxs,
-      indent: AppSpacing.lg,
-      endIndent: AppSpacing.lg,
     );
   }
+
+  @override
+  InputDecorationTheme get _inputDecorationTheme {
+    return InputDecorationTheme(
+      suffixIconColor: AppColors.mediumEmphasisPrimary,
+      prefixIconColor: AppColors.mediumEmphasisPrimary,
+      hoverColor: AppColors.inputHoverDark,
+      focusColor: AppColors.inputFocusedDark,
+      fillColor: AppColors.inputEnabledDark,
+      enabledBorder: _textFieldBorder,
+      focusedBorder: _textFieldBorder,
+      disabledBorder: _textFieldBorder,
+      hintStyle: UITextStyle.bodyText1.copyWith(
+        color: AppColors.mediumEmphasisPrimary,
+      ),
+      contentPadding: const EdgeInsets.all(AppSpacing.lg),
+      border: const UnderlineInputBorder(),
+      filled: true,
+      isDense: true,
+      errorStyle: UITextStyle.caption,
+    );
+  }
+
+  @override
+  ListTileThemeData get _listTileTheme {
+    return ListTileThemeData(
+      iconColor: AppColors.onSurfaceDark,
+      textColor: AppColors.onSurfaceDark,
+      contentPadding: EdgeInsets.all(AppSpacing.lg),
+    );
+  }
+
+  @override
+  AppBarTheme get _appBarTheme {
+    return AppBarTheme(
+      iconTheme: _iconTheme,
+      titleTextStyle: _textTheme.titleLarge,
+      elevation: 0,
+      toolbarHeight: 64,
+      backgroundColor: AppColors.transparent,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
+      ),
+    );
+  }
+
+  @override
+  BottomNavigationBarThemeData get _bottomNavigationBarTheme {
+    return BottomNavigationBarThemeData(
+      backgroundColor: AppColors.surfaceDark,
+      selectedItemColor: AppColors.white,
+      unselectedItemColor: AppColors.white.withValues(alpha: 0.74),
+    );
+  }
+
+  @override
+  BottomSheetThemeData get _bottomSheetTheme =>
+      BottomSheetThemeData(backgroundColor: AppColors.surfaceDark);
+
+  @override
+  ButtonThemeData get _buttonTheme => ButtonThemeData(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(AppSpacing.sm),
+    ),
+  );
+
+  @override
+  ElevatedButtonThemeData get _elevatedButtonTheme => ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSpacing.sm),
+      ),
+    ),
+  );
+
+  @override
+  ProgressIndicatorThemeData get _progressIndicatorTheme =>
+      ProgressIndicatorThemeData(color: AppColors.white);
+
+  @override
+  SwitchThemeData get _switchTheme => SwitchThemeData(
+    thumbColor: WidgetStateProperty.all(AppColors.white),
+    trackColor: WidgetStateProperty.all(AppColors.outlineOnDark),
+  );
+
+  @override
+  TabBarThemeData get _tabBarTheme => TabBarThemeData(
+    indicator: ShapeDecoration(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSpacing.sm),
+      ),
+      color: AppColors.white,
+    ),
+  );
+
+  @override
+  ChipThemeData get _chipTheme => ChipThemeData(
+    backgroundColor: AppColors.primaryContainerDark,
+  );
+
+  @override
+  InputBorder get _textFieldBorder => const UnderlineInputBorder(
+    borderSide: BorderSide(width: AppSpacing.xxxs, color: AppColors.darkAqua),
+  );
 }

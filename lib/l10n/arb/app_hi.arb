@@ -216,5 +216,47 @@
         "description": "त्रुटि UI अवस्था में उपयोग किया जाने वाला सामान्य त्रुटि शीर्षक।",
         "type": "text",
         "placeholders": {}
+    },
+    "navigation": "नेविगेशन",
+    "@navigation": {
+        "description": "नेविगेशन ड्रॉवर पर दिखाया गया शीर्षक।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "preferences": "प्रेफ़रेंस",
+    "@preferences": {
+        "description": "प्रेफ़रेंस ड्रॉवर पर दिखाया गया शीर्षक।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "support": "सपोर्ट",
+    "@support": {
+        "description": "सपोर्ट ड्रॉवर पर दिखाया गया शीर्षक।",
+        "type": "text",
+        "placeholders": {}
+    },
+     "about": "विषय में",
+    "@about": {
+        "description": "विषय ड्रॉवर पर दिखाया गया शीर्षक।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "helpAndSupport": "सहायता और समर्थन",
+    "@helpAndSupport": {
+        "description": "सहायता और समर्थन ड्रॉवर पर दिखाया गया शीर्षक।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "vault": "रहस्य",
+    "@vault": {
+        "description": "रहस्य ड्रॉवर पर दिखाया गया शीर्षक।",
+        "type": "text",
+        "placeholders": {}
+    },
+    "settings": "समायोजन",
+    "@settings": {
+        "description": "समायोजन ड्रॉवर पर दिखाया गया शीर्षक।",
+        "type": "text",
+        "placeholders": {}
     }
 }

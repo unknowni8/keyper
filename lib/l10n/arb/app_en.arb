@@ -216,5 +216,41 @@
         "description": "Generic error title used in error UI states.",
         "type": "text",
         "placeholders": {}
+    },
+    "navigation": "Navigation",
+    "@navigation": {
+        "description": "Title shown at the top of the navigation drawer.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "preferences": "Preferences",
+    "@preferences": {
+        "description": "Title shown at the top of the preferences drawer.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "about": "About",
+    "@about": {
+        "description": "Title shown at the top of the about drawer.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "helpAndSupport": "Help & Support",
+    "@helpAndSupport": {
+        "description": "Title shown at the top of the help and support drawer.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "vault": "Vault",
+    "@vault": {
+        "description": "Title shown at the top of the vault drawer.",
+        "type": "text",
+        "placeholders": {}
+    },
+    "settings": "Settings",
+    "@settings": {
+        "description": "Title shown at the top of the settings drawer.",
+        "type": "text",
+        "placeholders": {}
     }
 }

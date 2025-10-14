@@ -1,6 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keyper/l10n/l10n.dart';
 import 'package:keyper/profile/bloc/locale_cubit.dart';
 
 class LanguageSelector extends StatelessWidget {
@@ -10,44 +11,8 @@ class LanguageSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final locale = context.watch<LocaleCubit>().state;
-    final chipColor = theme.colorScheme.primary;
-    final onPrimary = theme.colorScheme.onPrimary;
 
-    Widget buildChip({
-      required Locale value,
-      required String label,
-      required Key key,
-    }) {
-      final isSelected = locale.languageCode == value.languageCode;
-      return ChoiceChip(
-        key: key,
-        selected: isSelected,
-        onSelected: (_) => context.read<LocaleCubit>().setLocale(value),
-        label: Text(
-          label,
-          style: TextStyle(
-            color: isSelected ? onPrimary : chipColor,
-            fontWeight: FontWeight.w600,
-            fontSize: 13,
-          ),
-        ),
-        backgroundColor: chipColor.withValues(alpha: 0.1),
-        selectedColor: chipColor,
-        elevation: isSelected ? 2 : 0,
-        shadowColor: chipColor.withValues(alpha: 0.3),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(
-            color: isSelected ? chipColor : chipColor.withValues(alpha: 0.3),
-            width: 1.5,
-          ),
-        ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 8,
-        ),
-      );
-    }
+    final languages = context.supportedLanguages;
 
     return Container(
       key: const Key('languageSelector_container'),
@@ -59,20 +24,65 @@ class LanguageSelector extends StatelessWidget {
           color: AppColors.outlineOnDark.withValues(alpha: 0.2),
         ),
       ),
-      child: Wrap(
-        spacing: AppSpacing.sm,
-        children: [
-          buildChip(
-            value: const Locale('en'),
-            label: 'English',
-            key: const Key('languageSelector_en'),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxHeight: 260),
+        child: Scrollbar(
+          thumbVisibility: true,
+          child: ListView.separated(
+            key: const Key('languageSelector_list'),
+            shrinkWrap: true,
+            itemCount: languages.length,
+            separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.xs),
+            itemBuilder: (context, index) {
+              final item = languages[index];
+              final isSelected = locale.languageCode == item.locale.languageCode;
+              return InkWell(
+                key: Key('languageSelector_${item.locale.languageCode}'),
+                onTap: () => context.read<LocaleCubit>().setLocale(item.locale),
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.md,
+                    vertical: AppSpacing.sm,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isSelected
+                        ? theme.colorScheme.primary.withValues(alpha: 0.10)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: isSelected
+                          ? theme.colorScheme.primary
+                          : AppColors.outlineOnDark.withValues(alpha: 0.15),
+                      width: isSelected ? 1.5 : 1,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          item.name,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                            color: isSelected
+                                ? theme.colorScheme.primary
+                                : theme.colorScheme.onSurface.withValues(alpha: 0.85),
+                          ),
+                        ),
+                      ),
+                      if (isSelected)
+                        Icon(
+                          Icons.check_circle,
+                          color: theme.colorScheme.primary,
+                          size: 18,
+                        ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
-          buildChip(
-            value: const Locale('hi'),
-            label: 'हिंदी',
-            key: const Key('languageSelector_hi'),
-          ),
-        ],
+        ),
       ),
     );
   }

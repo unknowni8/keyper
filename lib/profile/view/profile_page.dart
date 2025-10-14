@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keyper/l10n/l10n.dart';
 import 'package:keyper/profile/view/language_selector.dart';
+import 'package:keyper/theme_selector/bloc/theme_mode_bloc.dart';
 import 'package:keyper/theme_selector/view/theme_selector.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -10,42 +14,49 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              context.l10n.profileSettingsTitle,
+      child: ListView(
+        children: [
+          ListTile(
+            title: Text(
+              context.l10n.themeSectionTitle,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: AppSpacing.lg),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  context.l10n.themeSectionTitle,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: AppSpacing.sm),
-                const ThemeSelector(key: Key('profile_theme_selector')),
-              ],
+            trailing: Chip(
+              label: Text(
+                context.read<ThemeModeBloc>().state == ThemeMode.system
+                    ? context.l10n.systemOption
+                    : context.read<ThemeModeBloc>().state == ThemeMode.dark
+                    ? context.l10n.darkModeOption
+                    : context.l10n.lightModeOption,
+              ),
             ),
-            const SizedBox(height: AppSpacing.lg),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  context.l10n.languageSectionTitle,
-                  style: Theme.of(context).textTheme.titleMedium,
+            onTap: () {
+              unawaited(
+                showAppModal<void>(
+                  context: context,
+                  builder: (context) => const ThemeSelector(),
                 ),
-                const SizedBox(height: AppSpacing.sm),
-                const LanguageSelector(),
-              ],
+              );
+            },
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          ListTile(
+            title: Text(
+              context.l10n.languageSectionTitle,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
-            const SizedBox(height: AppSpacing.xlg),
-          ],
-        ),
+            trailing: const Icon(Icons.arrow_forward_ios_outlined),
+            onTap: () {
+              unawaited(
+                showAppModal<void>(
+                  context: context,
+                  builder: (context) => const LanguageSelector(),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: AppSpacing.xlg),
+        ],
       ),
     );
   }

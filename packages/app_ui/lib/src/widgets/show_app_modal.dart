@@ -10,6 +10,7 @@ Future<T?> showAppModal<T>({
   Color? barrierColor,
   bool isDismissible = true,
   bool enableDrag = true,
+  bool useRootNavigator = true,
   AnimationController? transitionAnimationController,
 }) {
   return showModalBottomSheet(
@@ -21,6 +22,7 @@ Future<T?> showAppModal<T>({
     barrierColor: barrierColor,
     isDismissible: isDismissible,
     enableDrag: enableDrag,
+    useRootNavigator: useRootNavigator,
     transitionAnimationController: transitionAnimationController,
     elevation: elevation,
   );
