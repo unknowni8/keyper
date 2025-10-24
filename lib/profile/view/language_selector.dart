@@ -21,7 +21,7 @@ class LanguageSelector extends StatelessWidget {
         color: theme.colorScheme.surface.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: AppColors.outlineOnDark.withValues(alpha: 0.2),
+          color: AppColors.black.withValues(alpha: 0.2),
         ),
       ),
       child: ConstrainedBox(
@@ -53,7 +53,7 @@ class LanguageSelector extends StatelessWidget {
                     border: Border.all(
                       color: isSelected
                           ? theme.colorScheme.primary
-                          : AppColors.outlineOnDark.withValues(alpha: 0.15),
+                          : AppColors.black.withValues(alpha: 0.15),
                       width: isSelected ? 1.5 : 1,
                     ),
                   ),

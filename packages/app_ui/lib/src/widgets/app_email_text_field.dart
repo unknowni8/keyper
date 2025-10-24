@@ -46,7 +46,7 @@ class AppEmailTextField extends StatelessWidget {
         ),
         child: Icon(
           Icons.email_outlined,
-          color: AppColors.mediumEmphasisSurface,
+          color: AppColors.grey,
           size: 24,
         ),
       ),

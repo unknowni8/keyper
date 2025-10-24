@@ -1,3 +1,4 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -5,9 +6,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Home Page',
+    return Center(
+      child: Column(
+        children: [
+          FilledButton(onPressed: () {
+            
+          }, child: const Text("Submit")),
+          TextFormField(
+            forceErrorText: "Hello error text",
+          ),
+        ],
       ),
     );
   }

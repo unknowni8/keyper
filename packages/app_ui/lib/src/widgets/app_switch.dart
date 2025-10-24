@@ -35,20 +35,15 @@ class AppSwitch extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        ContentThemeOverrideBuilder(
-          builder: (context) => Text(
-            value ? onText : offText,
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: AppColors.eerieBlack,
-                ),
-          ),
+        Text(
+          value ? onText : offText,
+          style: Theme.of(
+            context,
+          ).textTheme.labelLarge?.copyWith(color: AppColors.grey),
         ),
         Padding(
           padding: const EdgeInsets.only(left: AppSpacing.xs),
-          child: Switch(
-            value: value,
-            onChanged: onChanged,
-          ),
+          child: Switch(value: value, onChanged: onChanged),
         ),
       ],
     );

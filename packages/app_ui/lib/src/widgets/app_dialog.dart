@@ -30,7 +30,7 @@ Future<T?> showAppDialog<T>({
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: BorderSide(
-            color: AppColors.outlineOnDark.withValues(alpha: 0.2),
+            color: AppColors.black.withValues(alpha: 0.2),
           ),
         ),
         child: Padding(

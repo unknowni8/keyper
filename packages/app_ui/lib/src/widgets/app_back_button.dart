@@ -43,7 +43,7 @@ class AppBackButton extends StatelessWidget {
       onPressed: onPressed ?? () => Navigator.of(context).pop(),
       icon: Assets.icons.backIcon.svg(
         colorFilter: ColorFilter.mode(
-          isLight ? AppColors.white : AppColors.highEmphasisSurface,
+          isLight ? AppColors.white : AppColors.black,
           BlendMode.srcIn,
         ),
       ),

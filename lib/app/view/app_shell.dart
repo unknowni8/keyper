@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:keyper/app/app.dart';
+import 'package:keyper/app/bloc/navigation_cubit.dart';
+import 'package:keyper/app/widgets/app_drawer.dart';
+import 'package:keyper/app/widgets/app_nav_bar.dart';
 
 class AppShell extends StatelessWidget {
   /// Constructs an [AppShell].
@@ -21,16 +23,10 @@ class AppShell extends StatelessWidget {
       create: (context) => NavigationCubit(),
       child: Scaffold(
         drawer: const AppDrawer(),
-        appBar: AppBar(),
-        onDrawerChanged: (isOpen) {
-          if (isOpen) {
-            unawaited(
-              SystemChrome.setEnabledSystemUIMode(
-                SystemUiMode.immersiveSticky,
-              ),
-            );
-          }
-        },
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+          elevation: 0,
+        ),
         body: navigationShell,
         bottomNavigationBar: BottomNavBar(
           // Here, the items of BottomNavigationBar are hard coded. In a real

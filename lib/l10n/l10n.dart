@@ -23,7 +23,7 @@ const Map<String, String> kSupportedLanguageNames = {
 };
 
 // Returns SupportedLanguage entries for the locales 
-// declared by AppLocalizations.
+// supported by AppLocalizations.
 List<SupportedLanguage> getSupportedLanguages() {
   return AppLocalizations.supportedLocales
       .map(

@@ -92,7 +92,7 @@ class AppTextField extends StatelessWidget {
             autocorrect: autocorrect,
             readOnly: readOnly,
             autofillHints: autoFillHints,
-            cursorColor: AppColors.darkAqua,
+            cursorColor: AppColors.lightModePrimary,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w500,
                 ),

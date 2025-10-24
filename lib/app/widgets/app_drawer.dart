@@ -1,8 +1,9 @@
-import 'package:app_ui/app_ui.dart' show AppLogo, AppSpacing;
+import 'package:app_ui/app_ui.dart' show AppSpacing;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:keyper/app/bloc/bloc.dart';
+import 'package:keyper/app/bloc/navigation_cubit.dart';
+import 'package:keyper/app/widgets/app_drawer_footer.dart';
+import 'package:keyper/app/widgets/app_drawer_header.dart';
 import 'package:keyper/l10n/l10n.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -15,7 +16,6 @@ class AppDrawer extends StatefulWidget {
 class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topRight: Radius.circular(AppSpacing.xlg),
@@ -24,18 +24,14 @@ class _AppDrawerState extends State<AppDrawer> {
       child: BlocBuilder<NavigationCubit, int>(
         builder: (context, index) {
           return NavigationDrawer(
+            tilePadding: const EdgeInsetsGeometry.all(AppSpacing.md),
+            header: const AppDrawerHeader(),
             selectedIndex: index,
             onDestinationSelected: (value) {
-              
               context.read<NavigationCubit>().update(value);
-              context.pop();
             },
+            footer: const AppDrawerFooter(),
             children: [
-              DrawerHeader(
-                child: theme.brightness == Brightness.light
-                    ? AppLogo.dark()
-                    : AppLogo.light(),
-              ),
               // Navigation section
               NavigationDrawerDestination(
                 icon: const Icon(Icons.security_outlined),
@@ -47,14 +43,12 @@ class _AppDrawerState extends State<AppDrawer> {
                 selectedIcon: const Icon(Icons.call),
                 label: Text(context.l10n.callLogsTitle),
               ),
-              const _NavDrawerDivider(),
               // Preferences section
               NavigationDrawerDestination(
                 icon: const Icon(Icons.settings_outlined),
                 selectedIcon: const Icon(Icons.settings),
                 label: Text(context.l10n.settings),
               ),
-              const _NavDrawerDivider(),
               // Support section
               NavigationDrawerDestination(
                 icon: const Icon(Icons.info_outlined),
@@ -71,14 +65,5 @@ class _AppDrawerState extends State<AppDrawer> {
         },
       ),
     );
-  }
-}
-
-class _NavDrawerDivider extends StatelessWidget {
-  const _NavDrawerDivider();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Divider();
   }
 }
